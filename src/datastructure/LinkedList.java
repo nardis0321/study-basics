@@ -54,4 +54,23 @@ public class LinkedList {
 		}
 	}
 	
+	public void removeNode(int index) {
+		Node target = getNode(index);
+		if(index==0) {					//첫번째 노드 삭제: 첫번째 노드를 다음 노드로 변경
+			head = target.getNext(); 
+			target = null;
+			size--;
+		} else if(target == tail) {		//마지막 노드 삭제: 이전 노드를 마지막 노드로 변경
+			Node former = getNode(index-1);
+			former.setNext(null); 
+			tail = former;
+			target = null;
+			size--;
+		} else {						//중간 노드 삭제: 이전 노드와 다음 노드를 연결
+			Node former = getNode(index-1);
+			former.setNext(target.getNext()); 
+			target = null;
+			size--;
+		}
+	}
 }
