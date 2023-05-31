@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 
-public class BrokenDroid {	//백준 5361
+public class BrokenDroid {	
+	//백준 5361
 
 	//가격 정보 
 	private float blasterRifle = 350.34f;
