@@ -11,13 +11,11 @@ public class WhatTheYodaSaid {
 		int sentenceQuantity = Integer.parseInt(br.readLine());
 		
 		while(sentenceQuantity-->0) {
-			String sentence = br.readLine();
-			String[] sentenceArray = sentence.split(" ");
-			for(int j=2; j<=sentenceArray.length-1; j++) {
-				System.out.print(sentenceArray[j]+" ");
+			String[] words = br.readLine().split(" ");
+			for(int i=2; i<=words.length-1; i++) {
+				System.out.print(words[i]+" ");
 			}
-			System.out.print(sentenceArray[0]+" ");
-			System.out.println(sentenceArray[1]);
+			System.out.println(words[0]+" "+words[1]);
 		}
 	}
 
