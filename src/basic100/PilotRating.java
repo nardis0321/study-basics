@@ -12,17 +12,16 @@ public class PilotRating {
 		int numOfPilots = Integer.parseInt(br.readLine()); //항상even
 
 		int[] ratingOfPilot = new int[numOfPilots];
-		for(int i=0; i<=numOfPilots-1; i++) {
+		for(int i=0; i<numOfPilots; i++) {
 			ratingOfPilot[i] = Integer.parseInt(br.readLine());
 		}
+		br.close();
 		Arrays.sort(ratingOfPilot);
 		
 		int minRating = Integer.MAX_VALUE;
 		for(int n=0; n< numOfPilots/2; n++) {
 			int rating = (ratingOfPilot[n] + ratingOfPilot[numOfPilots-n-1]);
-			if(minRating>rating) {
-				minRating = rating;
-			}
+			minRating = Math.min(rating, minRating);
 		}
 		
 		System.out.println(minRating);
