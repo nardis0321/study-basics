@@ -1,5 +1,4 @@
 package javajung;
-
 /**
  * 자바의 정석 4-12 구구단 문제
  * 2*1= 2    3*1= 3    4*1= 4
@@ -16,15 +15,18 @@ package javajung;
  */
 public class TimesTable {
     public static void main(String[] args) {
-        for(int i=0; i<9; i++){
-            for(int j=2; j<5; j++){
-                if((j + i/3*3) > 9)
+        for(int i=0; i<9; i++){ // 세로로 9줄
+            for(int j=2; j<5; j++){ // 가로로 3번 출력
+                int x = j + i/3*3;  // 234 반복 + (0, 3, 6을 3줄씩 반복)
+                int y = i%3 + 1;    // 0~8로 123 반복
+
+                if(x > 9)   // 9단까지만 출력
                     break;
 
-                System.out.printf("%d*%d=%2d    ", j + i/3*3, i%3 + 1, (j + i/3*3)*(i%3 + 1));
+                System.out.printf("%d*%d=%2d    ", x, y, x*y );
             }
             System.out.println();
-            if (i%3-2 == 0) System.out.println();
+            if (i%3-2 == 0) System.out.println(); //3줄에 1번씩 띄우기
         }
     }
 }
