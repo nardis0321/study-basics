@@ -1,27 +1,27 @@
 package datastructure;
 
-public class Node {
-	private Object data;
-	private Node next;
+public class Node <E> {
+	private E data;
+	private Node<E> next;
 	
-	public Node(Object data) {
+	public Node(E data) {
 		this.data = data;
 		this.next = null;
 	}
 
-	public Object getData() {
+	public E getData() {
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(E data) {
 		this.data = data;
 	}
 
-	public Node getNext() {
+	public Node<E> getNext() {
 		return next;
 	}
 
-	public void setNext(Node next) {
+	public void setNext(Node<E> next) {
 		this.next = next;
 	}
 	

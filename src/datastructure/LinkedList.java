@@ -1,21 +1,21 @@
 package datastructure;
 
-public class LinkedList {
-	private Node head;
-	private Node tail;
+public class LinkedList<E> {
+	private Node<E> head;
+	private Node<E> tail;
 	private int size = 0;
 	
-	public Node getNode(int index) {
+	public Node<E> getNode(int index) {
 		//head에서부터 index번째 노드 찾기
-		Node x = head;
+		Node<E> x = head;
 		for(int i=0; i<=index-1; i++) {
 			x = x.getNext();
 		}
 		return x;
 	}
 	
-	public void addInTheFirst(Object data) {
-		Node newNode = new Node(data);
+	public void addInTheFirst(E data) {
+		Node<E> newNode = new Node<>(data);
 		newNode.setNext(head); //이미 존재하는 헤드의 앞에 끼워넣어서 첫번째로 위치시키기
 		head = newNode;
 		size++;
@@ -24,8 +24,8 @@ public class LinkedList {
 		}
 	}
 	
-	public void addInTheLast(Object data) {
-		Node newNode = new Node(data);
+	public void addInTheLast(E data) {
+		Node<E> newNode = new Node<>(data);
 		if(size == 0) {
 			addInTheFirst(data);
 		} else {
@@ -35,14 +35,14 @@ public class LinkedList {
 		}
 	}
 	
-	public void addInTheMid(Object data, int index) {
+	public void addInTheMid(E data, int index) {
 		if(index == 0) {
 			addInTheFirst(data);
 		} else {
-			Node newNode = new Node(data);
+			Node<E> newNode = new Node<>(data);
 			
-			Node former = getNode(index-1);
-			Node later = former.getNext();
+			Node<E> former = getNode(index-1);
+			Node<E> later = former.getNext();
 
 			former.setNext(newNode);
 			newNode.setNext(later);
@@ -55,21 +55,23 @@ public class LinkedList {
 	}
 	
 	public void removeNode(int index) {
-		Node target = getNode(index);
+		Node<E> target = getNode(index);
 		if(index==0) {					//첫번째 노드 삭제: 첫번째 노드를 다음 노드로 변경
 			head = target.getNext(); 
-			target = null;
+			target.setData(null);
+			target.setNext(null);
 			size--;
 		} else if(target == tail) {		//마지막 노드 삭제: 이전 노드를 마지막 노드로 변경
-			Node former = getNode(index-1);
+			Node<E> former = getNode(index-1);
 			former.setNext(null); 
 			tail = former;
-			target = null;
+			target.setData(null);
 			size--;
 		} else {						//중간 노드 삭제: 이전 노드와 다음 노드를 연결
-			Node former = getNode(index-1);
-			former.setNext(target.getNext()); 
-			target = null;
+			Node<E> former = getNode(index-1);
+			former.setNext(target.getNext());
+			target.setData(null);
+			target.setNext(null);
 			size--;
 		}
 	}

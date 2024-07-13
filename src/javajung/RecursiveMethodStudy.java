@@ -22,48 +22,19 @@ public class RecursiveMethodStudy {
         return fibonacci(n-1)+fibonacci(n-2);
     }
 
-    /*
-    100(num)부터 1까지 더하기
-       문제를 정의하기 : return 100 + ... + 1 (100부터 1까지 모두 더한 결과)
-       베이스 조건 : 1에서 멈추기
-       1 => return 1
-       2 => return 2+1
-    */
+     /*
+     100(num)부터 1까지 더하기
+        문제를 정의하기 : return 100 + ... + 1 (100부터 1까지 모두 더한 결과)
+        베이스 조건 : 1에서 멈추기
+        1 => return 1
+        2 => return 2+1
+     */
     public static int sumNumbers(int num){
         if(num == 1)
             return 1;
         return num + sumNumbers(num-1);
         //
     }
-
-    /*
-    binary search
-        start - 시작 인덱스
-        end - 마지막 인덱스
-        array - 오름차순으로 정렬된 수가 들어있는 배열
-        num - 찾아야할 값
-        return : num의 index
-    */
-    public static int binary_search(int start, int end, int[] array, int num){
-        // 베이스 : start == end일 시, 해당 index를 반환 => array[mid] == num 으로 통합
-        int mid = (end + start)/2;  // 이분탐색을 위한 중간값 계산
-
-        if(array[mid] == num) { // index를 찾은 경우, 해당 index를 반환
-            return mid;
-        }
-
-        if (array[mid] < num){   // 찾은 값이 더 작은 값
-            if(mid+1 > end) // 끝까지 찾았지만 없는 경우
-                return -1;
-            return binary_search(mid+1, end, array, num);   // mid보다 큰 값 찾기
-        } else {                 // 찾은 값이 더 큰 값
-            if(mid-1 < start) // 끝까지 찾았지만 없는 경우
-                return -1;
-            return binary_search(start, mid-1, array, num); // mid보다 작은 값 찾기
-        }
-    }
-    // 문제를 정의하듯 코딩하기
-    // 테스트 케이스로 stack overflow 발생 찾음 --> mid값 미포함 조건 추가
 
     public static void main(String[] args) {
         // 팩토리얼 테스트
@@ -82,27 +53,5 @@ public class RecursiveMethodStudy {
         System.out.println("sumNumbers(10) = " + sumNumbers(10));
         System.out.println("sumNumbers(100) = " + sumNumbers(100));
 
-        // 바이너리 테스트
-        System.out.println("Binary Search: ");
-        int[] array = {1,2,3};
-        result = binary_search(0, array.length-1, array, 2);
-        System.out.println("test1 "+result);
-
-        array = new int[]{1, 2, 3, 4, 5, 6};
-        result = binary_search(0, array.length-1, array, 5);
-        System.out.println("test2 "+result);
-
-        array = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        result = binary_search(0, array.length-1, array, 9);
-        System.out.println("test3 "+result);
-
-        result = binary_search(0, array.length-1, array, 2);
-        System.out.println("test4 "+result);
-
-        result = binary_search(0, array.length-1, array, 16);
-        System.out.println("test5 "+result);
-
-        result = binary_search(0, array.length-1, array, 0);
-        System.out.println("test6 "+result);
     }
 }

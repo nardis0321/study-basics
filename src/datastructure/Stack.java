@@ -2,7 +2,7 @@ package datastructure;
 
 import java.util.ArrayList;
 
-public class Stack {
+public class Stack<E> {
     /**
      * stack의 조건: FILO
      * size isEmpty
@@ -10,7 +10,7 @@ public class Stack {
      * search(value) set(index, value)
      * 구현해보기
      */
-    private ArrayList<Object> stackList;
+    private ArrayList<E> stackList;
     private int top;
 
     public Stack(){
@@ -28,49 +28,49 @@ public class Stack {
     }
 
     // peak push pop
-    public Object peak(){
+    public E peak(){
         if(top<0){
             return null;
         }
         return stackList.get(top);
     }
 
-    public void push(Object obj){
-        stackList.add(obj);
+    public void push(E data){
+        stackList.add(data);
         top += 1;
     }
 
-    public Object pop(){
+    public E pop(){
         if(top<0){
             return null;
         }
 
-        Object obj = stackList.get(top);
+        E data = stackList.get(top);
         stackList.remove(top);
         top -= 1;
-        return obj;
+        return data;
     }
 
     // search(value) set(index, value)
-    public int search(Object obj){
+    public int search(E data){
         for(int i=0; i<stackList.size(); i++){
-            if(stackList.get(i) == obj){
+            if(stackList.get(i) == data){
                 return i;
             }
         }
         return -1;
     }
 
-    public void set(int index, Object value){
+    public void set(int index, E data){
         for(int i = index; i<stackList.size(); i++){
-            Object temp = stackList.get(i);
-            stackList.set(i, value);
-            value = temp;
+            E temp = stackList.get(i);
+            stackList.set(i, data);
+            data = temp;
         }
     }
 
     public static void main(String[] args) {
-        Stack st = new Stack();
+        Stack<Integer> st = new Stack<>();
         st.push(1);
         st.push(2);
         st.push(3);
