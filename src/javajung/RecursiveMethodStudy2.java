@@ -24,31 +24,29 @@ public class RecursiveMethodStudy2 {
     public static LinkedList<Integer> merge(LinkedList<Integer> a, LinkedList<Integer> b){
         /*
         베이스 조건 : 리스트 하나가 0이면 리턴하기
-        분해 : 한 리스트에서 하나씩 빼서 다른 리스트에 끼워넣기
-        조합 : a.add(위치가 문제야!, b.poll);
+        분해1 한 리스트에서 하나씩 빼서 다른 리스트에 끼워넣기
+        조합1 a.add(위치가 문제야!, b.poll);
+        문제  위치 찾는 코드가 복잡하다 ㅠㅠ 이럴 바에야 for문을 사용!
 
-        위치를 FOR문 쓰는 방법밖에 생각 못하고 있음 -> 아마 더 간단히 가능! 더 생각해보자
+        분해2 만약 분해를 둘다 한다면?
+        조합2 앞에서부터 순서대로 비교해서 제일 작은 것부터 뒤에 붙여나가기
+        문제  stack overflow. b에 제일 큰 수가 남아 merge된 a가 영원히 도는 현상
+
+        => 좀처럼 해결되지 않아 찾아보니... 자바에서는 LinkedList가 아니라 이 문제를 해결하기 위한 ListNode를 정의해서 사용해야만 재귀 가능한 문제였다.
          */
         if(b.isEmpty())
             return a;
-
         if(a.isEmpty())
             return b;
 
-        if(b.peek() < a.getFirst()){
-            a.addFirst(b.poll());
-        } else if (a.getLast() < b.peek()){
-            a.addLast(b.poll());
+        if(a.peek() < b.peek()){
+            a.addLast(a.poll());
         } else {
-            for(int i=0; i<a.size()-1; i++){
-                if(a.get(i) <= b.peek() && b.peek() <= a.get(i+1)){
-                    a.add(i+1, b.poll());
-                    break;
-                }
-            }
+            a.addLast(b.poll());
         }
         System.out.println("a = " + a);
-
+        System.out.println("b = " + b);
+        System.out.println();
         return merge(a, b);
     }
 
@@ -62,9 +60,11 @@ public class RecursiveMethodStudy2 {
         list1.add(2);
         list1.add(4);
         LinkedList<Integer> list2 = new LinkedList<>();
-        list2.add(1);
+        list2.add(3);
         list2.add(3);
         list2.add(4);
+        list2.add(5);
+        list2.add(5);
         merge(list1, list2);
         System.out.println("list1 = " + list1);
 
