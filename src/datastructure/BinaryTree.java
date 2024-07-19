@@ -1,5 +1,8 @@
 package datastructure;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinaryTree<Key extends Comparable<Key>> {
     /**
      * 이진트리의 노트 : key와 left, right
@@ -31,13 +34,6 @@ public class BinaryTree<Key extends Comparable<Key>> {
             System.out.println(n+" ");
             inorder(n.getRight());
         }
-        // 0 1 3 7
-        // 7: null --> sout(7) --> null
-        // 3:       sout(3) --> inorder(8) --> null, sout(8), null
-        // 1:       sout(1) --> indorder(4) -->
-        //                          inorder(9) --> null sout(9) null
-        //                          sout(4) --> inorder(10)=sout(10)
-        // 7 3 8 1 9 4 10
     }
     // 후위 : L R N
     public void postorder(NodeForTree n){
@@ -46,10 +42,22 @@ public class BinaryTree<Key extends Comparable<Key>> {
             postorder(n.getRight());
             System.out.println(n+" ");
         }
-        // 0 1 3 7 sout(7)
-        // 3: postorder(8) --> null sout(8) null --> sout(3)
-        // 1: postorder(4) --> p(9): sout(9), p(10): sout(10), sout(4)
-        // 7 8 3 9 10 4
     }
+
+    public void levelorder(NodeForTree n){
+       // level 순회는 QUEUE를 사용하면 넣은 순서대로 출력된다
+        Queue<NodeForTree> q = new LinkedList<>();
+        NodeForTree polled;
+        q.offer(n); //queue에 주어진 노드 n을 넣기
+        while(!q.isEmpty()){    // queue가 텅 빌 때까지 반복
+            polled = q.poll();  // 가장 먼저 저장한 노드를 꺼내서 출력
+            System.out.println(polled+" ");
+            if(polled.getLeft() != null)    // 꺼낸 노드의 왼쪽 오른쪽 노드를 순서대로 queue에 넣기
+                q.offer(polled.getLeft());
+            if(polled.getRight() != null)
+                q.offer(polled.getRight());
+        }
+    }
+
 
 }
