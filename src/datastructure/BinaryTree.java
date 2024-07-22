@@ -59,5 +59,11 @@ public class BinaryTree<Key extends Comparable<Key>> {
         }
     }
 
+    public int size(NodeForTree n){
+        if(n == null)    // 베이스 조건, 노드가 null일 시 사이즈 0으로 종료
+            return 0;
+        // 사이즈는 트리의 노드 수 = 1(루트의) + 왼쪽 노드수 + 오른쪽 노드 수
+        return (1 + size(n.getLeft()) + size(n.getRight()) );
+    }
 
 }
