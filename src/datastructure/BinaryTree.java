@@ -66,4 +66,10 @@ public class BinaryTree<Key extends Comparable<Key>> {
         return (1 + size(n.getLeft()) + size(n.getRight()) );
     }
 
+    public int height(NodeForTree n){
+        if(n == null)   // 베이스 조건, 노드가 null일 시 높이 추가되지 않음
+            return 0;
+        // 트리 높이 = 1(루트 포함하기) + max(루트 노드의 왼쪽 서브트리 높이, 루트노드의 오른쪽 서브트리 높이)
+        return 1 + Math.max(height(n.getLeft()), height(n.getRight()));
+    }
 }
