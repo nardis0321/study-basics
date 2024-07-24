@@ -72,4 +72,16 @@ public class BinaryTree<Key extends Comparable<Key>> {
         // 트리 높이 = 1(루트 포함하기) + max(루트 노드의 왼쪽 서브트리 높이, 루트노드의 오른쪽 서브트리 높이)
         return 1 + Math.max(height(n.getLeft()), height(n.getRight()));
     }
+
+    public boolean isEqual(NodeForTree n, NodeForTree m){
+        // 전위순회로 다른 부분 보이면 false - N L R
+        // 베이스: n과 m이 다르거나 둘다 null일 시 종료, 전부 순회하면 종료
+        if(n == null || m == null)
+            return n==m;
+        if(n.getKey().compareTo(m.getKey()) != 0){ // 노드 객체 비교 (==로 불가)
+            return false;
+        }
+        // left와 right를 재귀적으로 비교. ==일 시 false false가 true 됨
+        return isEqual(n.getLeft(), n.getLeft()) && isEqual(n.getRight(), m.getRight());
+    }
 }
