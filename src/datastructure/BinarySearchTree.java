@@ -43,4 +43,37 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         return get(root, key);
     }
 
+    /**
+     * 트리에 새로운 노드를 추가하는 put 메서드
+     * 1. 크기를 비교해서 적절한 위치 찾기
+     * 2-1. 이미 존재하는 key라면 value를 갱신
+     * 2-2. 새 노드를 생성하고 부모와 연결
+     * @param n 새 노드를 추가할 위치를 결정할 시작점
+     * @param k 새 노드의 Key
+     * @param v 새 노드의 Value
+     * @return  새로 저장된 노드
+     */
+    public NodeForBST put(NodeForBST n, Key k, Value v) {
+        /* 재귀 종료 조건
+            1. 적절한 위치를 찾아서 set노드를 완료
+            2. 파라미터 노드가 null : 노드가 (더이상) 없음 -> set 가능하도록 새로 등록할 노드 반환
+         */
+        if (n == null) {
+            return new NodeForBST(k, v);
+        }
+        int compared = n.getKey().compareTo(k);
+        if (compared > 0)                           // n의 key가 key보다 큼 -> 찾아야 하는 key가 더 작음
+            n.setLeft(put(n.getLeft(), k, v));      // 왼쪽에서 적절한 위치를 찾고 왼쪽에 연결
+        else if (compared < 0)                      // n의 key가 key보다 작음
+            n.setRight(put(n.getRight(), k, v));    // 오른쪽에서 적절한 위치를 찾고 오른쪽에 연결
+        else
+            n.setValue(v);                      // 적절한 위치를 찾음
+        return n;
+    }
+    /**
+     * root부터 시작하는 put 메서드
+     */
+    public void put(Key k, Value v) {
+        put(root, k, v);
+    }
 }
