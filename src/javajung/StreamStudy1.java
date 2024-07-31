@@ -84,6 +84,16 @@ class Exercise14_8 {
                                         partitioningBy(stu -> stu.getScore() < 150, counting())
                                 )
                         );
+        // -----------------------------------------------------
+        // 남자 true 여자 false
+        //      불합격true 합격 false
+        //       fianl value long : 명수
+        long failedMaleStuNum = failedStuBySex.get(true).get(true);
+        long failedFemaleStuNum = failedStuBySex.get(false).get(true);
+        System.out.println("불합격[남자]:" + failedMaleStuNum + "명");
+        System.out.println("불합격[여자]:" + failedFemaleStuNum + "명");
+
+
 
     }
 }
