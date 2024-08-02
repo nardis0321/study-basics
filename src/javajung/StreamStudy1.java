@@ -94,6 +94,24 @@ class Exercise14_8 {
         System.out.println("불합격[여자]:" + failedFemaleStuNum + "명");
 
 
+        // 반별 총점을 학년별로 나누어 출력--------------------------------
+        Map<Integer, Map<Integer, Long>> totalScoreByHakAndBan =
+        Arrays.stream(stuArr)
+                .collect(
+                    groupingBy(
+                            Student::getHak,
+                            groupingBy(
+                                    Student::getBan,
+                                    summingLong(Student::getScore)
+                            )
+                    )
+                );
+        //------------------------------------------------------------
+
+        for(Object e : totalScoreByHakAndBan.entrySet()){
+            System.out.println(e);
+        }
+
 
     }
 }
