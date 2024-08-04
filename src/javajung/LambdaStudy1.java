@@ -1,6 +1,7 @@
 package javajung;
 
 import java.util.*;
+import java.util.stream.Stream;
 // 자바에서는 메서드는 객체 안에 있어야 한다
 // 람다는 간결한 메서드
 
@@ -41,6 +42,22 @@ public class LambdaStudy1 {
         EmptyArrFunction f6 = () -> new int[]{};
         f6.emptyArr();
 
+        //14-4 배열의 문자열 길이 모두 더하기
+        String[] strArr = {"aaa", "bb", "c", "Dddd"};
+        Arrays.stream(strArr).map(String::length).forEach(System.out::println); // 3 2 1 4
+        Arrays.stream(strArr).mapToInt(String::length).forEach(System.out::println); // 3 2 1 4
+        Arrays.stream(strArr).mapToInt(String::length).sum(); //10
+        // map만 한 결과는 Stream이고 IntStream이 아니어서 sum 불가
+
+        Arrays.stream(strArr).map(String::length).count();  // 4
+        Arrays.stream(strArr).mapToInt(String::length).count(); // 4
+        Arrays.stream(strArr).count(); //4
+
+        Stream<String> strStream = Stream.of(strArr);
+//        strStream.mapToInt(s -> s.length()).sum();    스트림은 일회용
+        strStream.mapToInt(String::length).sum();
+        Stream<String> strStream2 = Stream.of(strArr);
+        strStream2.mapToInt(s -> s.length()).sum(); // 다시 생성해야 다시 사용 가능하다!!
     }
 }
 
