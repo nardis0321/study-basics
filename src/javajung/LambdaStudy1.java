@@ -58,6 +58,22 @@ public class LambdaStudy1 {
         strStream.mapToInt(String::length).sum();
         Stream<String> strStream2 = Stream.of(strArr);
         strStream2.mapToInt(s -> s.length()).sum(); // 다시 생성해야 다시 사용 가능하다!!
+
+        //14-5 가장 긴 문자열의 길이
+        OptionalInt maxLengthOfStrArr = Arrays.stream(strArr).mapToInt(String::length).max();
+        System.out.println(maxLengthOfStrArr.getAsInt());
+
+        // sort 사용하기
+        Optional<Integer> theLongest = Arrays.stream(strArr).map(String::length).sorted(Comparator.reverseOrder()).findFirst();
+        System.out.println("theLongest.get() = " + theLongest.get());
+        // mapToInt 후 sorted(Comparator.reverseOrder())가 안 되는 이유?
+        // Expected 0 arguments but found 1 -- mapToInt의 sorted()에는 argument를 쓸 수 없다
+        // map과 mapToInt의 차이! 반환타입? map의 반환타입은 Stream<R>, mapToInt의 반환타입은 IntStream
+        // Stream<R>은 Comparator로 sort할 수 있고 IntStream은 Comparator로 sort 할 수 없는 이유 : 객체타입 스트림은 참조형, 원시타입 스트림은 기본형!
+
+        // 또 다른 방법
+        Stream<String> strStream3 = Stream.of(strArr);
+        strStream3.mapToInt(String::length).sorted().limit(1).forEach(System.out::println);
     }
 }
 
