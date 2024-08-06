@@ -74,6 +74,12 @@ public class LambdaStudy1 {
         // 또 다른 방법
         Stream<String> strStream3 = Stream.of(strArr);
         strStream3.mapToInt(String::length).sorted().limit(1).forEach(System.out::println);
+
+        // 가장 긴 문자열 자체를 출력하기
+        System.out.println("Arrays.stream(strArr).max(Comparator.comparingInt(String::length)).get() = "
+                + Arrays.stream(strArr).max(Comparator.comparingInt(String::length)).get());
+        Arrays.stream(strArr).sorted(Comparator.comparingInt(String::length).reversed()).limit(1).forEach(System.out::println);
+
     }
 }
 
