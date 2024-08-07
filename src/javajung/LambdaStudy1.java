@@ -80,6 +80,13 @@ public class LambdaStudy1 {
                 + Arrays.stream(strArr).max(Comparator.comparingInt(String::length)).get());
         Arrays.stream(strArr).sorted(Comparator.comparingInt(String::length).reversed()).limit(1).forEach(System.out::println);
 
+        // 14-6. 임의의 로또 번호 정렬 출력
+        new Random().ints(1, 46)
+                .distinct()
+                .limit(6)
+                .sorted()
+                .forEach(System.out::println);
+
     }
 }
 
